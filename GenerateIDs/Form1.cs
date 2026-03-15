@@ -199,7 +199,7 @@ namespace GenerateIDs
             dataGridView1.Columns[0].Width = 70;
             if (isArabic)
             {
-                dataGridView1.RightToLeft = RightToLeft.No;
+                dataGridView1.RightToLeft = RightToLeft.Yes;
                 dataGridView1.Columns[0].HeaderText = "«·—ﬁ„";
                 
                 dataGridView1.Columns[1].HeaderText = "ÂÊÌ… «·ÿ«·»";
