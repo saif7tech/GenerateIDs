@@ -35,28 +35,35 @@
             lblYear = new Label();
             txbYearSyn = new TextBox();
             lblMessage = new Label();
-            btnExport = new Button();
-            lblStudentsCount = new Label();
+            lblDigitLength = new Label();
             lblMaxDigitValue = new Label();
             txbDigitLength = new TextBox();
             cbxMaxValue = new ComboBox();
             groupBox2 = new GroupBox();
             lblCountRows = new Label();
             dataGridView1 = new DataGridView();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            exportResultAsExcelToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            languageToolStripMenuItem = new ToolStripMenuItem();
+            arabicToolStripMenuItem = new ToolStripMenuItem();
+            englishToolStripMenuItem = new ToolStripMenuItem();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // btnGenerate
             // 
             btnGenerate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGenerate.Font = new Font("Segoe UI", 12F);
-            btnGenerate.Location = new Point(37, 13);
+            btnGenerate.Location = new Point(6, 22);
             btnGenerate.Name = "btnGenerate";
-            btnGenerate.Size = new Size(117, 38);
+            btnGenerate.Size = new Size(95, 61);
             btnGenerate.TabIndex = 0;
-            btnGenerate.Text = "إنشاء";
+            btnGenerate.Text = "إنشاء هويات";
             btnGenerate.UseVisualStyleBackColor = true;
             btnGenerate.Click += btnGenerate_Click;
             // 
@@ -68,16 +75,15 @@
             groupBox1.Controls.Add(lblYear);
             groupBox1.Controls.Add(txbYearSyn);
             groupBox1.Controls.Add(lblMessage);
-            groupBox1.Controls.Add(btnExport);
-            groupBox1.Controls.Add(lblStudentsCount);
+            groupBox1.Controls.Add(lblDigitLength);
             groupBox1.Controls.Add(lblMaxDigitValue);
             groupBox1.Controls.Add(btnGenerate);
             groupBox1.Controls.Add(txbDigitLength);
             groupBox1.Controls.Add(cbxMaxValue);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(12, 27);
             groupBox1.Name = "groupBox1";
             groupBox1.RightToLeft = RightToLeft.Yes;
-            groupBox1.Size = new Size(673, 162);
+            groupBox1.Size = new Size(673, 147);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "خيارات التسلسل الامتحاني";
@@ -87,18 +93,18 @@
             lblOfficeName.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblOfficeName.AutoSize = true;
             lblOfficeName.Font = new Font("Segoe UI", 12F);
-            lblOfficeName.Location = new Point(321, 89);
+            lblOfficeName.Location = new Point(192, 62);
             lblOfficeName.Name = "lblOfficeName";
             lblOfficeName.RightToLeft = RightToLeft.Yes;
-            lblOfficeName.Size = new Size(128, 21);
+            lblOfficeName.Size = new Size(152, 21);
             lblOfficeName.TabIndex = 9;
-            lblOfficeName.Text = "رمز أختصار للسنة :";
+            lblOfficeName.Text = "رمز أختصار المؤسسة :";
             // 
             // txbOfficeSyn
             // 
             txbOfficeSyn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txbOfficeSyn.Font = new Font("Segoe UI", 12F);
-            txbOfficeSyn.Location = new Point(236, 85);
+            txbOfficeSyn.Location = new Point(107, 59);
             txbOfficeSyn.Name = "txbOfficeSyn";
             txbOfficeSyn.Size = new Size(79, 29);
             txbOfficeSyn.TabIndex = 8;
@@ -108,7 +114,7 @@
             lblYear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblYear.AutoSize = true;
             lblYear.Font = new Font("Segoe UI", 12F);
-            lblYear.Location = new Point(539, 89);
+            lblYear.Location = new Point(192, 26);
             lblYear.Name = "lblYear";
             lblYear.RightToLeft = RightToLeft.Yes;
             lblYear.Size = new Size(128, 21);
@@ -119,7 +125,7 @@
             // 
             txbYearSyn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txbYearSyn.Font = new Font("Segoe UI", 12F);
-            txbYearSyn.Location = new Point(454, 85);
+            txbYearSyn.Location = new Point(107, 23);
             txbYearSyn.Name = "txbYearSyn";
             txbYearSyn.Size = new Size(79, 29);
             txbYearSyn.TabIndex = 6;
@@ -129,41 +135,29 @@
             lblMessage.AutoSize = true;
             lblMessage.Font = new Font("Segoe UI", 12F);
             lblMessage.ForeColor = Color.Red;
-            lblMessage.Location = new Point(416, 124);
+            lblMessage.Location = new Point(383, 108);
             lblMessage.Name = "lblMessage";
             lblMessage.Size = new Size(0, 21);
             lblMessage.TabIndex = 5;
             // 
-            // btnExport
+            // lblDigitLength
             // 
-            btnExport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExport.Font = new Font("Segoe UI", 12F);
-            btnExport.Location = new Point(6, 57);
-            btnExport.Name = "btnExport";
-            btnExport.Size = new Size(168, 53);
-            btnExport.TabIndex = 4;
-            btnExport.Text = "تصدير النتائج الى ملف أكسل";
-            btnExport.UseVisualStyleBackColor = true;
-            btnExport.Click += btnExport_Click;
-            // 
-            // lblStudentsCount
-            // 
-            lblStudentsCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblStudentsCount.AutoSize = true;
-            lblStudentsCount.Font = new Font("Segoe UI", 12F);
-            lblStudentsCount.Location = new Point(575, 44);
-            lblStudentsCount.Name = "lblStudentsCount";
-            lblStudentsCount.RightToLeft = RightToLeft.Yes;
-            lblStudentsCount.Size = new Size(94, 21);
-            lblStudentsCount.TabIndex = 3;
-            lblStudentsCount.Text = "عدد المراتب :";
+            lblDigitLength.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblDigitLength.AutoSize = true;
+            lblDigitLength.Font = new Font("Segoe UI", 12F);
+            lblDigitLength.Location = new Point(493, 26);
+            lblDigitLength.Name = "lblDigitLength";
+            lblDigitLength.RightToLeft = RightToLeft.Yes;
+            lblDigitLength.Size = new Size(94, 21);
+            lblDigitLength.TabIndex = 3;
+            lblDigitLength.Text = "عدد المراتب :";
             // 
             // lblMaxDigitValue
             // 
             lblMaxDigitValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblMaxDigitValue.AutoSize = true;
             lblMaxDigitValue.Font = new Font("Segoe UI", 12F);
-            lblMaxDigitValue.Location = new Point(321, 44);
+            lblMaxDigitValue.Location = new Point(493, 62);
             lblMaxDigitValue.Name = "lblMaxDigitValue";
             lblMaxDigitValue.RightToLeft = RightToLeft.Yes;
             lblMaxDigitValue.Size = new Size(153, 21);
@@ -174,7 +168,7 @@
             // 
             txbDigitLength.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txbDigitLength.Font = new Font("Segoe UI", 12F);
-            txbDigitLength.Location = new Point(490, 40);
+            txbDigitLength.Location = new Point(408, 23);
             txbDigitLength.Name = "txbDigitLength";
             txbDigitLength.Size = new Size(79, 29);
             txbDigitLength.TabIndex = 1;
@@ -184,7 +178,7 @@
             cbxMaxValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cbxMaxValue.Font = new Font("Segoe UI", 12F);
             cbxMaxValue.FormattingEnabled = true;
-            cbxMaxValue.Location = new Point(259, 40);
+            cbxMaxValue.Location = new Point(416, 59);
             cbxMaxValue.Name = "cbxMaxValue";
             cbxMaxValue.Size = new Size(56, 29);
             cbxMaxValue.TabIndex = 0;
@@ -206,7 +200,7 @@
             // 
             lblCountRows.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblCountRows.AutoSize = true;
-            lblCountRows.Location = new Point(587, 246);
+            lblCountRows.Location = new Point(521, 246);
             lblCountRows.Name = "lblCountRows";
             lblCountRows.Size = new Size(0, 15);
             lblCountRows.TabIndex = 1;
@@ -221,6 +215,57 @@
             dataGridView1.Size = new Size(704, 216);
             dataGridView1.TabIndex = 0;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, languageToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(710, 24);
+            menuStrip1.TabIndex = 3;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportResultAsExcelToolStripMenuItem, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "File";
+            // 
+            // exportResultAsExcelToolStripMenuItem
+            // 
+            exportResultAsExcelToolStripMenuItem.Name = "exportResultAsExcelToolStripMenuItem";
+            exportResultAsExcelToolStripMenuItem.Size = new Size(213, 22);
+            exportResultAsExcelToolStripMenuItem.Text = "تصدير النتائج الى ملف أكسل";
+            exportResultAsExcelToolStripMenuItem.Click += exportResultAsExcelToolStripMenuItem_Click;
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(213, 22);
+            exitToolStripMenuItem.Text = "إنهاء";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // languageToolStripMenuItem
+            // 
+            languageToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { arabicToolStripMenuItem, englishToolStripMenuItem });
+            languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            languageToolStripMenuItem.Size = new Size(88, 20);
+            languageToolStripMenuItem.Text = "English/عربي";
+            // 
+            // arabicToolStripMenuItem
+            // 
+            arabicToolStripMenuItem.Name = "arabicToolStripMenuItem";
+            arabicToolStripMenuItem.Size = new Size(180, 22);
+            arabicToolStripMenuItem.Text = "عربي";
+            arabicToolStripMenuItem.Click += arabicToolStripMenuItem_Click;
+            // 
+            // englishToolStripMenuItem
+            // 
+            englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            englishToolStripMenuItem.Size = new Size(180, 22);
+            englishToolStripMenuItem.Text = "English";
+            englishToolStripMenuItem.Click += englishToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -228,16 +273,22 @@
             ClientSize = new Size(710, 450);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "Form1";
             RightToLeft = RightToLeft.Yes;
             Text = "تطبيق IMT الامتحاني";
+            WindowState = FormWindowState.Maximized;
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -249,13 +300,19 @@
         private ComboBox cbxMaxValue;
         private GroupBox groupBox2;
         private DataGridView dataGridView1;
-        private Button btnExport;
         private Label lblMessage;
-        private Label lblStudentsCount;
+        private Label lblDigitLength;
         private Label lblCountRows;
         private Label lblYear;
         private TextBox txbYearSyn;
         private Label lblOfficeName;
         private TextBox txbOfficeSyn;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem exportResultAsExcelToolStripMenuItem;
+        private ToolStripMenuItem languageToolStripMenuItem;
+        private ToolStripMenuItem arabicToolStripMenuItem;
+        private ToolStripMenuItem englishToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
     }
 }
