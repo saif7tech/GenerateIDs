@@ -228,8 +228,8 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportResultAsExcelToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Size = new Size(42, 20);
+            fileToolStripMenuItem.Text = "ملف";
             // 
             // exportResultAsExcelToolStripMenuItem
             // 
