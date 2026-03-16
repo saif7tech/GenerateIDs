@@ -6,10 +6,39 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Title>Generate Student IDs</Title>
+    <Authors>Saif AbdulSattar Abduljabbar</Authors>
+    <Company>Institute of Medical Technology Baghdad</Company>
+    <Product>Generate Student IDs</Product>
+    <Description>Application used to Design Student ID form and Generate table</Description>
+    <Copyright>IMT@mtu.edu.iq</Copyright>
+    <PackageIcon>IMT.jpeg</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="C:\Users\ThinkPad\Downloads\IMG\IMT.jpeg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.105.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
