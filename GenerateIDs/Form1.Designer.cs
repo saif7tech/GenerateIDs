@@ -228,8 +228,8 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportResultAsExcelToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Size = new Size(42, 20);
+            fileToolStripMenuItem.Text = "ملف";
             // 
             // exportResultAsExcelToolStripMenuItem
             // 
@@ -255,14 +255,14 @@
             // arabicToolStripMenuItem
             // 
             arabicToolStripMenuItem.Name = "arabicToolStripMenuItem";
-            arabicToolStripMenuItem.Size = new Size(180, 22);
+            arabicToolStripMenuItem.Size = new Size(112, 22);
             arabicToolStripMenuItem.Text = "عربي";
             arabicToolStripMenuItem.Click += arabicToolStripMenuItem_Click;
             // 
             // englishToolStripMenuItem
             // 
             englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            englishToolStripMenuItem.Size = new Size(180, 22);
+            englishToolStripMenuItem.Size = new Size(112, 22);
             englishToolStripMenuItem.Text = "English";
             englishToolStripMenuItem.Click += englishToolStripMenuItem_Click;
             // 
@@ -279,6 +279,7 @@
             RightToLeft = RightToLeft.Yes;
             Text = "تطبيق IMT الامتحاني";
             WindowState = FormWindowState.Maximized;
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

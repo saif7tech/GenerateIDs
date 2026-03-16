@@ -11,7 +11,7 @@ namespace GenerateIDs
     {
         DataTable dtStudents = new DataTable();
         int counter = 0;
-        
+        bool isExportLastResult;
         bool isArabic;
         public Form1()
         {
@@ -26,7 +26,7 @@ namespace GenerateIDs
             }
 
             isArabic = true;
-
+            isExportLastResult = false;
             cbxMaxValue.SelectedIndex = 0;
 
             dtStudents.Columns.Add("No", typeof(int));
@@ -36,11 +36,12 @@ namespace GenerateIDs
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            isExportLastResult = false;
             lblMessage.Text = string.Empty;
             lblCountRows.Text = string.Empty;
             // ≈⁄«œ…  ÂÌ∆… «·»Ì«‰« 
             counter = 0;
-            
+
             dtStudents.Clear();
 
             dataGridView1.DataSource = null;
@@ -51,7 +52,7 @@ namespace GenerateIDs
             if (!int.TryParse(txbDigitLength.Text, out DigitLength))
             {
                 informMessage(2);
-                //lblMessage.Text = "«·—Ã«¡ ≈œŒ«· ﬁÌ„… —ﬁ„Ì…";
+
                 return;
             }
 
@@ -73,7 +74,7 @@ namespace GenerateIDs
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             TableLanguage();
-       
+
 
         }
 
@@ -158,7 +159,7 @@ namespace GenerateIDs
             fileToolStripMenuItem.Text = "File";
             exportResultAsExcelToolStripMenuItem.Text = "Export Results to Excel";
 
-            lblDigitLength.Text = "Number of Digit:";
+            lblDigitLength.Text = "Number of Digits:";
             lblMaxDigitValue.Text = "Maximum Digit Value:";
             lblYear.Text = "Year Abbreviation:";
             lblOfficeName.Text = "Office Abbreviation:";
@@ -170,10 +171,15 @@ namespace GenerateIDs
 
         private void exportResultAsExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ExportResult();
+        }
+
+        private void ExportResult()
+        {
             if (dtStudents.Rows.Count == 0)
             {
                 informMessage(0);
-                // lblMessage.Text = "·«Ì„ﬂ‰ «‰‘«¡ ÃœÊ· √ﬂ”· »”»» ⁄œ„ ÊÃÊœ ‰ «∆Ã";
+
                 return;
             }
             SaveFileDialog sfd = new SaveFileDialog();
@@ -189,27 +195,38 @@ namespace GenerateIDs
                     wb.SaveAs(sfd.FileName);
                 }
 
+                informMessage(1);
+                isExportLastResult = true;
 
-                //MessageBox.Show(" „  ’œÌ— «·»Ì«‰«  »‰Ã«Õ");
             }
         }
-
         private void TableLanguage()
         {
-            dataGridView1.Columns[0].Width = 70;
+
             if (isArabic)
             {
-                dataGridView1.RightToLeft = RightToLeft.No;
-                dataGridView1.Columns[0].HeaderText = "«·—ﬁ„";
-                
-                dataGridView1.Columns[1].HeaderText = "ÂÊÌ… «·ÿ«·»";
+
+                if (dtStudents.Rows.Count != 0)
+                {
+                    dataGridView1.RightToLeft = RightToLeft.Yes;
+                    dataGridView1.Columns[0].HeaderText = "«·—ﬁ„";
+                    dataGridView1.Columns[0].Width = 70;
+                    dataGridView1.Columns[1].HeaderText = "ÂÊÌ… «·ÿ«·»";
+                }
+
                 lblCountRows.Text = "⁄œœ «·«”ÿ— ( " + dtStudents.Rows.Count + " )";
             }
             else
             {
-                dataGridView1.RightToLeft = RightToLeft.No;
-                dataGridView1.Columns[0].HeaderText = "No";
-                dataGridView1.Columns[1].HeaderText = "Student ID";
+
+                if (dtStudents.Rows.Count != 0)
+                {
+                    dataGridView1.RightToLeft = RightToLeft.No;
+                    dataGridView1.Columns[0].HeaderText = "No";
+                    dataGridView1.Columns[0].Width = 70;
+                    dataGridView1.Columns[1].HeaderText = "Student ID";
+                }
+
                 lblCountRows.Text = "Number of Rows ( " + dtStudents.Rows.Count + " ) ";
             }
 
@@ -223,12 +240,18 @@ namespace GenerateIDs
                 case 0:
                     if (isArabic)
                     {
-                        MessageBox.Show("·«Ì„ﬂ‰ «‰‘«¡ ÃœÊ· √ﬂ”· »”»» ⁄œ„ ÊÃÊœ ‰ «∆Ã", "›‘· «· ’œÌ—", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("·«Ì„ﬂ‰ «‰‘«¡ ÃœÊ· √ﬂ”· »”»» ⁄œ„ ÊÃÊœ ‰ «∆Ã",
+                            " ⁄–—  ’œÌ— «·»Ì«‰« ",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk,
+                            MessageBoxDefaultButton.Button1,
+                            MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+
 
                     }
                     else
                     {
-                        MessageBox.Show("Excel file cannot be created because there are no results.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Excel file cannot be created because there are no results.",
+                            "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
                     }
                     break;
@@ -237,8 +260,10 @@ namespace GenerateIDs
                     {
                         MessageBox.Show(" „  ’œÌ— «·»Ì«‰«  »‰Ã«Õ.",
                                              " „  «·⁄„·Ì… »‰Ã«Õ",
-                                             MessageBoxButtons.OK,
-                                             MessageBoxIcon.Information);
+                                             MessageBoxButtons.OK, MessageBoxIcon.Information,
+                                             MessageBoxDefaultButton.Button1,
+                                             MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+
                     }
                     else
                     {
@@ -252,15 +277,19 @@ namespace GenerateIDs
                 case 2:
                     if (isArabic)
                     {
-                        MessageBox.Show("«·ﬁÌ„… «·„œŒ·… €Ì— ’ÕÌÕ…. Ì—ÃÏ ≈œŒ«· ⁄œœ ’ÕÌÕ ›Ì Õﬁ· ⁄œœ «·Œ«‰« .",
-                                        "Œÿ√ ›Ì «·≈œŒ«·", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        //Ì—ÃÏ ≈œŒ«· Ã„Ì⁄ «·ÕﬁÊ· «·„ÿ·Ê»…
+                        MessageBox.Show("Ì—ÃÏ ≈œŒ«· ⁄œœ ’ÕÌÕ ›Ì Õﬁ· ⁄œœ «·„—« ».",
+                                        "»Ì«‰«  €Ì— ’ÕÌÕ…", MessageBoxButtons.OK, MessageBoxIcon.Asterisk,
+                                        MessageBoxDefaultButton.Button1,
+                                        MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+
                     }
                     else
                     {
-                        MessageBox.Show("Please enter a valid integer in the 'Number of Digits' field.",
-                                             "Input Error",
+                        MessageBox.Show("Please insert integer number in the 'Number of Digits' field.",
+                                            "Data Entry Error",
                                              MessageBoxButtons.OK,
-                                             MessageBoxIcon.Exclamation);
+                                             MessageBoxIcon.Asterisk);
                     }
 
 
@@ -276,6 +305,54 @@ namespace GenerateIDs
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((isExportLastResult == false) && (dtStudents.Rows.Count != 0))
+            {
+
+                DialogResult result;
+
+
+                if (isArabic)
+                {
+
+
+                    result = MessageBox.Show("Â·  —Ìœ Õ›Ÿ «·»Ì«‰«  ﬁ»· ≈€·«ﬁ «·‰„Ê–Ãø",
+                                        " √ﬂÌœ «·≈€·«ﬁ",
+                                        MessageBoxButtons.YesNoCancel,
+                                        MessageBoxIcon.Question,
+                                        MessageBoxDefaultButton.Button1,
+                                        MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+                }
+                else
+                {
+
+
+                    result = MessageBox.Show("Do you want to save the data before closing the form?",
+                                        "Confirm Close",
+                                        MessageBoxButtons.YesNoCancel,
+                                        MessageBoxIcon.Question);
+                }
+
+
+
+
+                if (result == DialogResult.Yes)
+                {
+                    ExportResult();
+                    e.Cancel = true;
+                }
+
+                if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+
+
+
+            }
         }
     }
 }
