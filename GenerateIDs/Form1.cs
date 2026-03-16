@@ -11,7 +11,7 @@ namespace GenerateIDs
     {
         DataTable dtStudents = new DataTable();
         int counter = 0;
-        
+        bool isExportLastResult;
         bool isArabic;
         public Form1()
         {
@@ -26,7 +26,7 @@ namespace GenerateIDs
             }
 
             isArabic = true;
-
+            isExportLastResult = false;
             cbxMaxValue.SelectedIndex = 0;
 
             dtStudents.Columns.Add("No", typeof(int));
@@ -36,11 +36,12 @@ namespace GenerateIDs
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            isExportLastResult = false;
             lblMessage.Text = string.Empty;
             lblCountRows.Text = string.Empty;
             // ≈⁄«œ…  ÂÌ∆… «·»Ì«‰« 
             counter = 0;
-            
+
             dtStudents.Clear();
 
             dataGridView1.DataSource = null;
@@ -73,7 +74,7 @@ namespace GenerateIDs
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             TableLanguage();
-       
+
 
         }
 
@@ -170,6 +171,11 @@ namespace GenerateIDs
 
         private void exportResultAsExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ExportResult();
+        }
+
+        private void ExportResult()
+        {
             if (dtStudents.Rows.Count == 0)
             {
                 informMessage(0);
@@ -189,27 +195,36 @@ namespace GenerateIDs
                     wb.SaveAs(sfd.FileName);
                 }
 
-
+                informMessage(1);
+                isExportLastResult = true;
                 //MessageBox.Show(" „  ’œÌ— «·»Ì«‰«  »‰Ã«Õ");
             }
         }
-
         private void TableLanguage()
         {
-            dataGridView1.Columns[0].Width = 70;
+
             if (isArabic)
             {
-                dataGridView1.RightToLeft = RightToLeft.Yes;
-                dataGridView1.Columns[0].HeaderText = "«·—ﬁ„";
-                
-                dataGridView1.Columns[1].HeaderText = "ÂÊÌ… «·ÿ«·»";
+                if (isExportLastResult)
+                {
+                    dataGridView1.RightToLeft = RightToLeft.Yes;
+                    dataGridView1.Columns[0].HeaderText = "«·—ﬁ„";
+                    dataGridView1.Columns[0].Width = 70;
+                    dataGridView1.Columns[1].HeaderText = "ÂÊÌ… «·ÿ«·»";
+                }
+
                 lblCountRows.Text = "⁄œœ «·«”ÿ— ( " + dtStudents.Rows.Count + " )";
             }
             else
             {
-                dataGridView1.RightToLeft = RightToLeft.No;
-                dataGridView1.Columns[0].HeaderText = "No";
-                dataGridView1.Columns[1].HeaderText = "Student ID";
+                if (isExportLastResult)
+                {
+                    dataGridView1.RightToLeft = RightToLeft.No;
+                    dataGridView1.Columns[0].HeaderText = "No";
+                    dataGridView1.Columns[0].Width = 70;
+                    dataGridView1.Columns[1].HeaderText = "Student ID";
+                }
+
                 lblCountRows.Text = "Number of Rows ( " + dtStudents.Rows.Count + " ) ";
             }
 
@@ -252,7 +267,7 @@ namespace GenerateIDs
                 case 2:
                     if (isArabic)
                     {
-                        MessageBox.Show("«·ﬁÌ„… «·„œŒ·… €Ì— ’ÕÌÕ…. Ì—ÃÏ ≈œŒ«· ⁄œœ ’ÕÌÕ ›Ì Õﬁ· ⁄œœ «·Œ«‰« .",
+                        MessageBox.Show("«·ﬁÌ„… «·„œŒ·… €Ì— ’ÕÌÕ…. Ì—ÃÏ ≈œŒ«· ⁄œœ ’ÕÌÕ ›Ì Õﬁ· ⁄œœ «·„—« ».",
                                         "Œÿ√ ›Ì «·≈œŒ«·", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else
@@ -276,6 +291,47 @@ namespace GenerateIDs
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((isExportLastResult == false) && (dtStudents.Rows.Count != 0))
+            {
+                String MessageStr = String.Empty;
+                String MessageTitle = String.Empty;
+
+                if (isArabic)
+                {
+                    MessageTitle = "€·ﬁ «·‰«›–…";
+                    MessageStr = "Â·  —Ìœ Õ›Ÿ «·»Ì«‰«  ﬁ»· ≈€·«ﬁ «·‰„Ê–Ãø";
+                }
+                else
+                {
+                    MessageTitle = "Exit Application";
+                    MessageStr = "Do you want to save the data before closing the form?";
+                }
+
+
+                DialogResult result = MessageBox.Show(MessageStr, MessageTitle, 
+                                        MessageBoxButtons.YesNoCancel,
+                                        MessageBoxIcon.Question,
+                                        MessageBoxDefaultButton.Button1,
+                                        MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+
+                if (result == DialogResult.Yes)
+                {
+                    ExportResult();
+                    e.Cancel=true;
+                }
+
+                if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+
+
+
+            }
         }
     }
 }
