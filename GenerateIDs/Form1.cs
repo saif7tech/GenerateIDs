@@ -31,7 +31,7 @@ namespace GenerateIDs
 
             dtStudents.Columns.Add("No", typeof(int));
             dtStudents.Columns.Add("StudentID", typeof(string));
-
+            dtStudents.Columns.Add("ID", typeof(string));
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -92,7 +92,9 @@ namespace GenerateIDs
 
                 string formattedID = FormatStudentID(currentID);
 
-                dtStudents.Rows.Add(counter, txbOfficeSyn.Text + txbYearSyn.Text + formattedID);
+                dtStudents.Rows.Add(counter,
+                    txbOfficeSyn.Text + txbYearSyn.Text + formattedID,
+                    txbOfficeSyn.Text + txbYearSyn.Text + currentID);
                 return;
             }
 
@@ -190,9 +192,24 @@ namespace GenerateIDs
             {
                 using (XLWorkbook wb = new XLWorkbook())
                 {
-                    wb.Worksheets.Add(dtStudents, "Students");
+                    
+                    var worksheet = wb.Worksheets.Add(dtStudents, isArabic ? "«·ÿ·«»" : "Students");
+                    
+                    if (isArabic)
+                    {
+                        worksheet.Cell(1, 1).Value = "«· ”·”·";
+                        worksheet.Cell(1, 2).Value = "—ﬁ„ «·ÿ«·»";
+                        worksheet.Cell(1, 3).Value = "ID";
+                    }
+                    else
+                    {
+                        worksheet.Cell(1, 1).Value = "No";
+                        worksheet.Cell(1, 2).Value = "Student ID";
+                        worksheet.Cell(1, 3).Value = "ID";
+                    }
 
-                    wb.SaveAs(sfd.FileName);
+
+                        wb.SaveAs(sfd.FileName);
                 }
 
                 informMessage(1);
